@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class QuestionReponseService {
     private final QuestionReponseRepository repository;
@@ -36,9 +35,9 @@ public class QuestionReponseService {
 
         // Vérifier si la précision est supérieure ou égale au seuil
         if (precision >= 0.7) {
-            return "Vous avez posé : '" + question + "'. Peut-être vouliez-vous dire : '" + questionLaPlusProche + "' ? Réponse : " + reponse;
+            return reponse;
         } else {
-            return "Désolé, je n'ai pas de réponse pour cette question.";
+            return "Vous avez posé : '" + question + "'. Peut-être vouliez-vous dire : '" + questionLaPlusProche + "' ? Réponse : " + reponse;
         }
     }
 
@@ -60,5 +59,5 @@ public class QuestionReponseService {
         }
 
         return distance[s1.length()][s2.length()];
-}
+    }
 }
