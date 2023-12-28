@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class QuestionReponseService {
     private final QuestionReponseRepository repository;
@@ -36,9 +35,9 @@ public class QuestionReponseService {
 
         // Vérifier si la précision est supérieure ou égale au seuil
         if (precision >= 0.7) {
-            return "Vous avez posé : '" + question + "'. Peut-être vouliez-vous dire : '" + questionLaPlusProche + "' ? Réponse : " + reponse;
+            return reponse;
         } else {
-            return "Désolé, je n'ai pas de réponse pour cette question.";
+            return "Vous avez posé : '" + question + "'. Peut-être vouliez-vous dire : '" + questionLaPlusProche + "' ? Réponse : " + reponse;
         }
     }
 
@@ -60,5 +59,28 @@ public class QuestionReponseService {
         }
 
         return distance[s1.length()][s2.length()];
-}
+    }
+
+
+
+    public QuestionReponse saveQuestionReponse(QuestionReponse qst) {
+        return repository.save(qst);
+    }
+    public  List<QuestionReponse> getListQuestionReponse(){
+        return  repository.findAll();
+    }
+      public void deleteQuestionReponse(Long id){
+            repository.deleteById(id);
+      }
+
+    public QuestionReponse updateQuestionReponse(Long id , QuestionReponse questionReponse) {
+        QuestionReponse questionReponse1 = repository.findById(id).orElseThrow(() -> new RuntimeException("Poster non trouvé avec l'ID : " + id));
+        // si exist
+        questionReponse1.setQuestion(questionReponse.getQuestion());
+        questionReponse1.setReponse(questionReponse.getReponse());
+         return repository.save(questionReponse1);
+    }
+    public QuestionReponse getQst(Long id){
+        return  repository.findById(id).get();
+    }
 }
