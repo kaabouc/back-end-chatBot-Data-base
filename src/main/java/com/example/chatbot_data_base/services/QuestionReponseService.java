@@ -61,8 +61,6 @@ public class QuestionReponseService {
         return distance[s1.length()][s2.length()];
     }
 
-
-
     public QuestionReponse saveQuestionReponse(QuestionReponse qst) {
         return repository.save(qst);
     }
